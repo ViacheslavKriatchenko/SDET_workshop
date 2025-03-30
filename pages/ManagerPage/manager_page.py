@@ -1,3 +1,4 @@
+import allure
 import random
 import string
 
@@ -10,14 +11,17 @@ class ManagerPage(BasePage):
     PAGE_URL = "https://www.globalsqa.com/angularJs-protractor/BankingProject/#/manager"
     Locators = ManagerLocator()
 
-    def click_add_customer_button(self):
+    @allure.step("Кликаем по кнопке 'Add Customer")
+    def click_add_customer_button(self) -> None:
         self.click_element(self.Locators.ADD_CUSTOMER)
 
+    @allure.step("Генерируем N-значное число")
     def generate_N_number(self, N: int) -> int:
         if N < 1:
             raise ValueError("Количество цифр не может быть меньше 1")
         return f"{random.randint(0, 10**N - 1):0{N}d}"
 
+    @allure.step("Преобразуем число в текст")
     def number_to_letters(self, number: int) -> str:
         number = str(number)
         alphabet = string.ascii_lowercase
@@ -26,27 +30,34 @@ class ManagerPage(BasePage):
         letters = ''.join(alphabet[pair % 26] for pair in pairs)
         return letters
 
+    @allure.step("Ввод текста в поле 'First Name'")
     def input_first_name(self, code: int) -> str:
         name = self.number_to_letters(number=code)
         self.input_text(locator=self.Locators.FIRST_NAME_INPUT, text=name)
 
+    @allure.step("Ввод кода в поле 'Post Code'")
     def input_post_code(self, code: int) -> int:
         self.input_text(self.Locators.POST_CODE_INPUT, text=code)
 
+    @allure.step("Ввод текста в поле 'Last Name'")
     def input_last_name(self, lname) -> str:
         self.input_text(self.Locators.LAST_NAME_INPUT, text=lname)
 
+    @allure.step("Создаем запись нажатием кнопки 'Add Customer'")
     def click_add_customer_submit_button(self):
         self.click_element(
             element_locator=self.Locators.SUBMIT_ADD_CUSTOMER_BUTTON
             )
 
+    @allure.step("Кликаем по кнопку 'Customers'")
     def click_customers_button(self):
         self.click_element(self.Locators.CUSTOMERS_BUTTON)
 
+    @allure.step("Кликаем по кнопке фильтра 'First Name'")
     def click_filter_first_name(self):
         self.click_element(self.Locators.FILTER_FIRST_NAME)
 
+    @allure.step("Создаем список пользователей по имени")
     def take_customers_list(self) -> list:
         table = self.find_elements(self.Locators.TABLE_DATA)
         all_table_texts = [data.text for data in table]
