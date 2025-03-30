@@ -33,8 +33,8 @@ class ManagerPage(BasePage):
     def input_post_code(self, code: int) -> int:
         self.input_text(self.Locators.POST_CODE_INPUT, text=code)
 
-    def input_last_name(self) -> str:
-        self.input_text(self.Locators.LAST_NAME_INPUT, text="Siblicus")
+    def input_last_name(self, lname) -> str:
+        self.input_text(self.Locators.LAST_NAME_INPUT, text=lname)
 
     def click_add_customer_submit_button(self):
         self.click_element(
@@ -54,14 +54,17 @@ class ManagerPage(BasePage):
         return fName_list
 
     def search_avg_client_name(self):
-        names_elements_list = self.find_elements(self.Locators.TABLE_CUSTOMERS_NAME_LIST)
+        names_elements_list = self.find_elements(
+            self.Locators.TABLE_CUSTOMERS_NAME_LIST
+            )
         names_list = [name.text for name in names_elements_list if name.text != "First Name"]
 
         names_length_list = [len(name) for name in names_list]
         avg_length = sum(names_length_list) / len(names_elements_list)
 
-        closest_name = min(names_list, key=lambda name: abs(len(name)) - avg_length)
-
+        closest_name = min(
+            names_list, key=lambda name: abs(len(name)) - avg_length
+            )
         return closest_name
 
     def remove_client(self, closest_name):

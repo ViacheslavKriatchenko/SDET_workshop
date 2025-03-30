@@ -22,7 +22,8 @@
 2. Запустить виртуальное окружение "python -m venv venv"
 3. Установить окружение "python -m pip install -r requirements.txt"
 4. Запустить тесты "pytest -s -v --alluredir allure_results"
-5. Просмотреть отчет "allure serve allure_results"
+5. Запустить тесты в несколько потоков pytest -n 2  # запуск в 2 потока
+6. Просмотреть отчет "allure serve allure_results"
 
 ### Стэк:
 - Selenium

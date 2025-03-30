@@ -17,7 +17,7 @@ def driver():
     DRIVER_NAME = ConfigProvider().get(section='common', prop='BROWSER')
     if DRIVER_NAME == 'Chrome':
         options = ChromeOptions()
-        # options.add_argument('--headless')
+        options.add_argument('--headless')
         options.add_argument("--window-size=1920,1080")
         options.add_argument("--disable-blink-features=AutomationControlled")
         options.add_argument(

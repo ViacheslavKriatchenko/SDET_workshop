@@ -1,15 +1,17 @@
 from pages.ManagerPage.manager_page import ManagerPage
+from data.user_data import Data
 
 
 def test_add_customer(driver):
     manager = ManagerPage(driver)
+    data = Data()
 
     manager.open_the_page()
     manager.click_add_customer_button()
-    code = manager.generate_N_number(10)
+    code = manager.generate_N_number(data.N)
     manager.input_post_code(code=code)
     manager.input_first_name(code=code)
-    manager.input_last_name()
+    manager.input_last_name(lname=data.lname)
     manager.click_add_customer_submit_button()
     alert_text = manager.switch_to_alert_and_take_text()
 
