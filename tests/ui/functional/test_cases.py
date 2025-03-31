@@ -31,7 +31,7 @@ def test_add_customer(driver):
         assert "Customer added successfully" in alert_text, "Ошибка: Запись не создана"
 
 
-@pytest.mark.ui
+@pytest.mark.smoke
 @allure.title("Сортировка клиента")
 @allure.tag("Тест-2")
 @allure.description("Отсортируем список со имени")
