@@ -9,6 +9,7 @@ from selenium.webdriver.firefox.service import Service as FireService
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.firefox.options import Options as FireOptions
 from config.ConfigProvider import ConfigProvider
+from pages.ManagerPage.manager_page import ManagerPage
 
 
 @pytest.fixture()
@@ -38,3 +39,8 @@ def driver():
     driver.implicitly_wait(10)
     yield driver
     driver.quit()
+
+
+@pytest.fixture
+def manager(driver):
+    return ManagerPage(driver)

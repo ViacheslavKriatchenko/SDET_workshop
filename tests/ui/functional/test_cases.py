@@ -53,9 +53,7 @@ def test_sort_by_fname(driver):
 @allure.tag("Тест-3")
 @allure.description("Удалим клиента, учитывая условия из тест-кейса")
 @allure.severity(allure.severity_level.CRITICAL)
-def test_delete_client(driver):
-    manager = ManagerPage(driver)
-
+def test_delete_client(manager):
     manager.open_the_page()
     manager.click_customers_button()
     avg_client_name = manager.search_avg_client_name()
