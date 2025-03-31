@@ -28,7 +28,7 @@ def driver():
         driver = webdriver.Chrome(options=options, service=service)
     elif DRIVER_NAME == 'Firefox':
         options = FireOptions()
-        # options.add_argument('--headless')
+        options.add_argument('--headless')
         options.add_argument('--windowsize=1920,1080')
         options.add_argument("--disable-blink-features=AutomationControlled")
         options.add_argument(

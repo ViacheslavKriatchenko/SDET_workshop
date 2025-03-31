@@ -57,7 +57,8 @@ def test_delete_client(manager):
     manager.open_the_page()
     manager.click_customers_button()
     avg_client_name = manager.search_avg_client_name()
-    manager.remove_client(avg_client_name)
+    for _ in avg_client_name:
+        manager.remove_client(_)
 
     with allure.step("Проверяем что запись пользователя удалена"):
         assert avg_client_name not in manager.take_customers_list(), "Ошибка: Запись не удалена"

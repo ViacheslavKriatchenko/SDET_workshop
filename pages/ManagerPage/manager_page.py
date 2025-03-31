@@ -5,6 +5,7 @@ import string
 from pages.BasePage.BasePage import BasePage
 from .manager_page_locators import ManagerLocator
 from data.user_data import Data
+from helpers import functions
 
 
 class ManagerPage(BasePage):
@@ -71,13 +72,10 @@ class ManagerPage(BasePage):
             self.Locators.TABLE_CUSTOMERS_NAME_LIST
             )
         names_list = [name.text for name in names_elements_list if name.text != "First Name"]
-
-        names_length_list = [len(name) for name in names_list]
-        avg_length = sum(names_length_list) / len(names_elements_list)
-
-        closest_name = min(
-            names_list, key=lambda name: abs(len(name)) - avg_length
-            )
+        names_length_list = functions.generator_str_in_len(names_list)
+        avg_length = functions.avg_length_list(names_length_list)
+        diff_lst = functions.min_diff(avg_length, names_length_list)
+        closest_name = functions.list_generator(names_list, avg_length, diff_lst)
         return closest_name
 
     @allure.step("Удаляем запись имени {closest_name} нажатием кнопки 'Delete'")
