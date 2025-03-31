@@ -45,17 +45,17 @@ class ManagerPage(BasePage):
         self.input_text(self.Locators.LAST_NAME_INPUT, text=lname)
 
     @allure.step("Создаем запись нажатием кнопки 'Add Customer'")
-    def click_add_customer_submit_button(self):
+    def click_add_customer_submit_button(self) -> None:
         self.click_element(
             element_locator=self.Locators.SUBMIT_ADD_CUSTOMER_BUTTON
             )
 
-    @allure.step("Кликаем по кнопку 'Customers'")
-    def click_customers_button(self):
+    @allure.step("Кликаем по кнопке 'Customers'")
+    def click_customers_button(self) -> None:
         self.click_element(self.Locators.CUSTOMERS_BUTTON)
 
     @allure.step("Кликаем по кнопке фильтра 'First Name'")
-    def click_filter_first_name(self):
+    def click_filter_first_name(self) -> None:
         self.click_element(self.Locators.FILTER_FIRST_NAME)
 
     @allure.step("Создаем список пользователей по имени")
@@ -65,7 +65,8 @@ class ManagerPage(BasePage):
         fName_list = [res.split()[0] for res in all_table_texts]
         return fName_list
 
-    def search_avg_client_name(self):
+    @allure.step("Находим ближайшее имя согласно средней длины имен таблицы")
+    def search_avg_client_name(self) -> str:
         names_elements_list = self.find_elements(
             self.Locators.TABLE_CUSTOMERS_NAME_LIST
             )
@@ -79,7 +80,8 @@ class ManagerPage(BasePage):
             )
         return closest_name
 
-    def remove_client(self, closest_name):
+    @allure.step("Удаляем запись имени {closest_name} нажатием кнопки 'Delete'")
+    def remove_client(self, closest_name) -> None:
         delete_xpath_button = f'//td[text()="{closest_name}"]/following-sibling::td/button[contains(text(), "Delete")]'
         DELETE_BUTTON = self.driver.find_element('xpath', delete_xpath_button)
         DELETE_BUTTON.click()

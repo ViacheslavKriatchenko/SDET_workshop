@@ -1,4 +1,4 @@
-import allure
+from typing import List
 
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.wait import WebDriverWait
@@ -18,7 +18,7 @@ class BasePage:
         return self.wait.until(EC.visibility_of_element_located(locator),
                                message=f"element {locator} is not found")
 
-    def find_elements(self, locator: tuple):
+    def find_elements(self, locator: tuple) -> List[WebElement]:
         return self.wait.until(EC.visibility_of_all_elements_located(locator),
                                message=f"element {locator} is not found")
 
