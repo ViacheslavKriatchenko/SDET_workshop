@@ -55,6 +55,10 @@ jobs:
       #     pytest -n 2 --alluredir=reports --disable-warnings
 
       - name: Запуск тестов по выбору
-        run:
-          pytest -m ${{ inputs.test_marker }} -n 2
+        run: |
+          if [ "${{ inputs.test_marker }}" == "ui" ]; then
+            pytest -n 2 -m "${{ inputs.test_marker }}"
+          elif [ "${{ inputs.test_marker }}" == "smoke" ]; then
+            pytest -n 2 -m "${{ inputs.test_marker }}"
+          else pytest -n
         
