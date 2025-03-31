@@ -50,15 +50,15 @@ jobs:
       #     name: allure-report
       #     path: reports
 
-      # - name: Run Tests in Parallel
-      #   run: |
-      #     pytest -n 2 --alluredir=reports --disable-warnings
-
-      - name: Запуск тестов по выбору
+      - name: Run Tests in Parallel
         run: |
-          if [ "${{ inputs.test_marker }}" == "ui" ]; then
-            pytest -n 2 -m "${{ inputs.test_marker }}"
-          elif [ "${{ inputs.test_marker }}" == "smoke" ]; then
-            pytest -n 2 -m "${{ inputs.test_marker }}"
-          else pytest -n
+          pytest -n 2
+
+      # - name: Запуск тестов по выбору
+      #   run: |
+      #     if [ "${{ inputs.test_marker }}" == "ui" ]; then
+      #       pytest -n 2 -m "${{ inputs.test_marker }}"
+      #     elif [ "${{ inputs.test_marker }}" == "smoke" ]; then
+      #       pytest -n 2 -m "${{ inputs.test_marker }}"
+      #     else pytest -n
         
