@@ -2,11 +2,11 @@ name: Run Automated Tests
 
 on:
   push:
-    #branches:
-      #- main
+    branches:
+      - develope
   pull_request:
-    #branches:
-      #- main
+    branches:
+      - main
   workflow_dispatch:
     inputs:
       test_marker:
@@ -40,9 +40,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run Tests with Pytest
+      - name: Запуск тестов по выбору
         run: |
-          pytest --alluredir=reports --disable-warnings
+          pytest -m "${{ inputs.test_marker }}"
 
       - name: Upload Allure Report
         uses: actions/upload-artifact@v4
@@ -53,8 +53,4 @@ jobs:
       - name: Run Tests in Parallel
         run: |
           pytest -n 2 --alluredir=reports --disable-warnings
-
-      - name: Запуск тестов по выбору
-        run:
-          pytest -m "${{ inputs.test_marker }}"
         
