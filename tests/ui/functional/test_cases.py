@@ -1,14 +1,20 @@
 import allure
+import pytest
 
 from pages.ManagerPage.manager_page import ManagerPage
 from data.user_data import Data
 
 
+@pytest.mark.ui
 @allure.title("Создание клиента")
 @allure.tag("Тест-1")
 @allure.description("Создадим клиента, учитывая условия из тест-кейса")
 @allure.severity(allure.severity_level.CRITICAL)
 def test_add_customer(driver):
+    '''
+    Этот тест преобразует данные и проверяет что клиент создался
+    This test converts the data and verifies that the client has been created
+    '''
     manager = ManagerPage(driver)
     data = Data()
 
@@ -25,6 +31,7 @@ def test_add_customer(driver):
         assert "Customer added successfully" in alert_text, "Ошибка: Запись не создана"
 
 
+@pytest.mark.ui
 @allure.title("Сортировка клиента")
 @allure.tag("Тест-2")
 @allure.description("Отсортируем список со имени")
@@ -41,6 +48,7 @@ def test_sort_by_fname(driver):
         assert fName_list == sorted(fName_list) or reversed(fName_list), f"Ошибка: список не отсортирован! {fName_list}"
 
 
+@pytest.mark.ui
 @allure.title("Удаление клиента")
 @allure.tag("Тест-3")
 @allure.description("Удалим клиента, учитывая условия из тест-кейса")
