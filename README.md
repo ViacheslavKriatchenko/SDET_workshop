@@ -38,6 +38,8 @@
     - ConfigProvider.py - глобальные 
 - ./data - тестовые данные
     - user_data.py
+- ./helpers - вспомогательные функции
+    - functions.py
 - ./pages - описание страниц сайта
 - ./tests - тесты
     - test_UI.py - UI тесты
