@@ -22,7 +22,7 @@ def test_add_customer(driver):
     alert_text = manager.switch_to_alert_and_take_text()
 
     with allure.step("Проверяем успешность создания записи"):
-        assert "Customer added successfully" in alert_text
+        assert "Customer added successfully" in alert_text, "Ошибка: Запись не создана"
 
 
 @allure.title("Сортировка клиента")
@@ -38,7 +38,7 @@ def test_sort_by_fname(driver):
     fName_list = manager.take_customers_list()
 
     with allure.step("Проверяем что список отсортирован"):
-        assert fName_list == sorted(fName_list) or reversed(fName_list)
+        assert fName_list == sorted(fName_list) or reversed(fName_list), f"Ошибка: список не отсортирован! {fName_list}"
 
 
 @allure.title("Удаление клиента")
@@ -54,4 +54,4 @@ def test_delete_client(driver):
     manager.remove_client(avg_client_name)
 
     with allure.step("Проверяем что запись пользователя удалена"):
-        assert avg_client_name not in manager.take_customers_list()
+        assert avg_client_name not in manager.take_customers_list(), "Ошибка: Запись не удалена"
