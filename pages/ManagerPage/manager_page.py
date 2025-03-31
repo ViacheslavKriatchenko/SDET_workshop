@@ -4,11 +4,12 @@ import string
 
 from config.BasePage import BasePage
 from .manager_page_locators import ManagerLocator
+from data.user_data import Data
 
 
 class ManagerPage(BasePage):
 
-    PAGE_URL = "https://www.globalsqa.com/angularJs-protractor/BankingProject/#/manager"
+    PAGE_URL = Data().URL
     Locators = ManagerLocator()
 
     @allure.step("Кликаем по кнопке 'Add Customer")
