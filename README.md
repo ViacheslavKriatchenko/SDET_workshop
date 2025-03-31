@@ -32,17 +32,22 @@
 - Allure
 
 ### Структура:
+- ./.github/workflows
+    - ci_tests.yml - настройки CI
 - ./config - настройка конфигурации
-    - locators.py - класс локаторов
-    - ConfigProvider.py - глобальные настройки
+    - ConfigProvider.py - глобальные 
+- ./data - тестовые данные
+    - user_data.py
 - ./pages - описание страниц сайта
 - ./tests - тесты
     - test_UI.py - UI тесты
+- ./.gitignore
 - conftest.py - фикстуры
 - global_options.ini - глобальные переменные
-- requirements.txt - настройка окружения
-- user_data.json - пользовательские данные
+- pytest.ini - настройки pytest
 - README.md - описание проекта
+- requirements.txt - настройка окружения
+- Test_cases.md - тестовые сценарии
 
 ### Полезные ссылки:
 [Гайд по Markdown](https://www.markdownguide.org/basic-syntax/)  

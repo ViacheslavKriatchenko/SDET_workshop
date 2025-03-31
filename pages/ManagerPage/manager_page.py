@@ -2,7 +2,7 @@ import allure
 import random
 import string
 
-from config.BasePage import BasePage
+from pages.BasePage.BasePage import BasePage
 from .manager_page_locators import ManagerLocator
 from data.user_data import Data
 
