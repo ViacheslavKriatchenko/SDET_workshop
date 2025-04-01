@@ -36,6 +36,7 @@ class ManagerPage(BasePage):
     def input_first_name(self, code: int) -> str:
         name = self.number_to_letters(number=code)
         self.input_text(locator=self.Locators.FIRST_NAME_INPUT, text=name)
+        return name
 
     @allure.step("Ввод кода в поле 'Post Code'")
     def input_post_code(self, code: int) -> int:

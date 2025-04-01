@@ -16,13 +16,16 @@ def test_add_customer(manager, data):
     manager.click_add_customer_button()
     code = manager.generate_N_number(data.N)
     manager.input_post_code(code=code)
-    manager.input_first_name(code=code)
+    name = manager.input_first_name(code=code)
     manager.input_last_name(lname=data.lname)
     manager.click_add_customer_submit_button()
     alert_text = manager.switch_to_alert_and_take_text()
 
     with allure.step("Проверяем успешность создания записи"):
         assert "Customer added successfully" in alert_text, "Ошибка: Запись не создана"
+    with allure.step("Проверяем что созданная запись находится в таблице"):
+        manager.click_customers_button()
+        assert name in manager.take_customers_list()
 
 
 @pytest.mark.smoke
