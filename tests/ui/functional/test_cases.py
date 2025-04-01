@@ -25,7 +25,7 @@ def test_add_customer(manager, data):
         assert "Customer added successfully" in alert_text, "Ошибка: Запись не создана"
     with allure.step("Проверяем что созданная запись находится в таблице"):
         manager.click_customers_button()
-        assert name in manager.take_customers_list()
+        assert name in manager.take_customers_list(), f"Имя {name} не найдено"
 
 
 @pytest.mark.smoke
