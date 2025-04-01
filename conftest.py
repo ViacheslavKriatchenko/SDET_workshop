@@ -10,6 +10,7 @@ from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.firefox.options import Options as FireOptions
 from config.ConfigProvider import ConfigProvider
 from pages.ManagerPage.manager_page import ManagerPage
+from data.user_data import Data
 
 
 @pytest.fixture()
@@ -44,3 +45,8 @@ def driver():
 @pytest.fixture
 def manager(driver):
     return ManagerPage(driver)
+
+
+@pytest.fixture
+def data():
+    return Data()

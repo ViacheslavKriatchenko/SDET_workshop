@@ -1,23 +1,17 @@
 import allure
 import pytest
 
-from pages.ManagerPage.manager_page import ManagerPage
-from data.user_data import Data
-
 
 @pytest.mark.ui
 @allure.title("Создание клиента")
 @allure.tag("Тест-1")
 @allure.description("Создадим клиента, учитывая условия из тест-кейса")
 @allure.severity(allure.severity_level.CRITICAL)
-def test_add_customer(driver):
+def test_add_customer(manager, data):
     '''
     Этот тест преобразует данные и проверяет что клиент создался
     This test converts the data and verifies that the client has been created
     '''
-    manager = ManagerPage(driver)
-    data = Data()
-
     manager.open_the_page()
     manager.click_add_customer_button()
     code = manager.generate_N_number(data.N)
@@ -36,9 +30,7 @@ def test_add_customer(driver):
 @allure.tag("Тест-2")
 @allure.description("Отсортируем список со имени")
 @allure.severity(allure.severity_level.CRITICAL)
-def test_sort_by_fname(driver):
-    manager = ManagerPage(driver)
-
+def test_sort_by_fname(manager):
     manager.open_the_page()
     manager.click_customers_button()
     manager.click_filter_first_name()
