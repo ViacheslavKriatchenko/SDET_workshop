@@ -6,3 +6,4 @@ class Data:
     URL = f'{HOST}angularJs-protractor/BankingProject/#/manager'
     N = 10
     lname = "Siblicus"
+    API_HOST = ConfigProvider().get(section='api', prop='HOST')
