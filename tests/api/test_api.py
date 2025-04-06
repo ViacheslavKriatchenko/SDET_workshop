@@ -8,8 +8,10 @@ from api.endpoints import patch_update_object
 from api.endpoints import delete_object
 from api.data.api_data import payloads
 from api.tools.assertions.base import assert_status_code
+from api.tools.assertions.base import assert_equal
 from api.tools.assertions.json_validate_schema import validate_json_schema
 from api.data.api_data.schemas import CreateObjectSchema
+
 
 
 @allure.title("Создание объекта")
@@ -32,4 +34,4 @@ def test_get_object(api_create_object):
 
     get.get_object_by_id(object_id=id)
     res_id = get.response_json['id']
-    assert res_id == id
+    assert_equal(actual=id, expected=res_id, name='id')
