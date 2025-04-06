@@ -23,7 +23,7 @@ class CreateObject:
         self.response_json = self.response.json()
 
 
-class CreateObjectSchema:
+class CreateJsonObjectSchema:
 
     Schema = {
         "type": "integer"

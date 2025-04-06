@@ -22,8 +22,29 @@ class GetObject:
         self.response_json = self.response.json()
 
 
-class GetObjectSchema:
+class GetJsonObjectSchema:
 
     Schema = {
-        "type": "integer"
+        "type": "object",
+        "property": {
+            "id": {"type": "integer"},
+            "title": {"type": "string"},
+            "verified": {"type": "boolean"},
+            "addition": {
+                "type": "object",
+                "property": {
+                    "id": {"type": "integer"},
+                    "additional_info": {"type": "string"},
+                    "additional_number": {"type": "integer"}
+                },
+                "required": ["id", "additional_info", "additional_number"],
+                "additionalProperties": False
+            },
+            "important_numbers": {
+                "type": "array",
+                "items": {
+                    "type": "integer"
+                }
+            }
+        }
     }

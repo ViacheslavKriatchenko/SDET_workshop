@@ -15,5 +15,5 @@ def api_create_object():
     create.create_object(payload=validate_data.model_dump())
 
     assert_status_code(actual=create.response.status_code, expected=200)
-    validate_json_schema(instance=create.response_json, schema=create_object.CreateObjectSchema.Schema)
-    return create.response_json
+    validate_json_schema(instance=create.response_json, schema=create_object.CreateJsonObjectSchema.Schema)
+    return create.response_json, validate_data.model_dump()

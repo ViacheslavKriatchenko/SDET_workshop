@@ -19,3 +19,43 @@ class GetObjects:
             url=f'{self.URL}/api/getall'
         )
         self.response_json = self.response.json()
+
+
+class GetAllJsonObjectSchema:
+
+    Schema = {
+        "type": "object",
+        "properties": {
+            "entity": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "id": {"type": "integer"},
+                        "title": {"type": "string"},
+                        "verified": {"type": "boolean"},
+                        "addition": {
+                            "type": "object",
+                            "properties": {
+                                "id": {"type": "integer"},
+                                "additional_info": {"type": "string"},
+                                "additional_number": {"type": "integer"}
+                            },
+                            "required": ["id", "additional_info", "additional_number"],
+                            "additionalProperties": False
+                        },
+                        "important_numbers": {
+                            "type": "array",
+                            "items": {
+                                "type": "integer"
+                                }
+                        }
+                    },
+                    "required": ["id", "title", "verified", "addition", "important_numbers"],
+                    "additionalProperties": False
+                }
+            }
+        },
+        "required": ["entity"],
+        "additionalProperties": False
+    }

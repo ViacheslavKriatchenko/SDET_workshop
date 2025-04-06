@@ -23,15 +23,37 @@ def test_create_object():
     create.create_object(payload=validate_data.model_dump())
 
     assert_status_code(actual=create.response.status_code, expected=200)
-    validate_json_schema(instance=create.response_json, schema=create_object.CreateObjectSchema.Schema)
+    validate_json_schema(instance=create.response_json, schema=create_object.CreateJsonObjectSchema.Schema)
 
 
 @allure.title("Подтверждение создания объекта")
 @pytest.mark.api
 def test_get_object(api_create_object):
     get = get_object.GetObject()
-    id = api_create_object
+    id, request_body = api_create_object
 
     get.get_object_by_id(object_id=id)
     res_id = get.response_json['id']
+
     assert_equal(actual=id, expected=res_id, name='id')
+    assert_equal(actual=get.response_json['title'], expected=request_body['title'], name="title")
+    assert_status_code(actual=get.response.status_code, expected=200)
+    validate_json_schema(instance=get.response_json, schema=get_object.GetJsonObjectSchema.Schema)
+
+
+@allure.title("Подтверждение создания объекта")
+@pytest.mark.api
+def test_getall_objects(api_create_object):
+    pass
+
+
+@allure.title("Подтверждение создания объекта")
+@pytest.mark.api
+def test_update_object(api_create_object):
+    pass
+
+
+@allure.title("Удаление созданного объекта объекта")
+@pytest.mark.api
+def test_delete_object(api_create_object):
+    pass
