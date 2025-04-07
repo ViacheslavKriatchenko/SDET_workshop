@@ -13,7 +13,6 @@ from api.tools.assertions.json_validate_schema import validate_json_schema
 from api.data.api_data.schemas import CreateObjectSchema
 
 
-
 @allure.title("Создание объекта")
 @pytest.mark.api
 def test_create_object():
@@ -28,9 +27,9 @@ def test_create_object():
 
 @allure.title("Подтверждение создания объекта")
 @pytest.mark.api
-def test_get_object(api_create_object):
+def test_get_object(api_create_object_fixture):
     get = get_object.GetObject()
-    id, request_body = api_create_object
+    id, request_body = api_create_object_fixture
 
     get.get_object_by_id(object_id=id)
     res_id = get.response_json['id']
@@ -43,17 +42,28 @@ def test_get_object(api_create_object):
 
 @allure.title("Подтверждение создания объекта")
 @pytest.mark.api
-def test_getall_objects(api_create_object):
-    pass
+def test_getall_objects(api_create_object_fixture):
+    getall = get_getall_objects.GetObjects()
+    id = api_create_object_fixture
+
+    getall.get_all_object()
+    validate_json_schema(instance=getall.response_json, schema=get_getall_objects.GetAllJsonObjectSchema.Schema)
+    assert "entity" in getall.response_json
+    assert id in getall.response_json
 
 
-@allure.title("Подтверждение создания объекта")
+@allure.title("Обновление созданного объекта")
 @pytest.mark.api
-def test_update_object(api_create_object):
+def test_update_object(api_create_object_fixture):
     pass
 
 
 @allure.title("Удаление созданного объекта объекта")
 @pytest.mark.api
-def test_delete_object(api_create_object):
-    pass
+def test_delete_object(api_create_object_fixture):
+    id = api_create_object_fixture[0]
+    delete = delete_object.DeleteObject()
+
+    delete.delete_object_by_id(object_id=id)
+
+    assert_status_code(actual=delete.response.status_code, expected=204)

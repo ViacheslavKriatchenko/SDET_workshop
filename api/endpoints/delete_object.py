@@ -10,7 +10,7 @@ class DeleteObject:
     response_json = None
 
     @allure.step("DELETE request")
-    def delete_object_by_id(self, object_id):
+    def delete_object_by_id(self, object_id: int) -> None:
         '''
         DELETE-запрос
 
@@ -20,7 +20,10 @@ class DeleteObject:
         self.response = requests.delete(
             url=f'{self.URL}/api/delete/{object_id}'
         )
-        self.response_json = self.response.json()
+        try:
+            self.response_json = self.response.json()
+        except requests.JSONDecodeError:
+            self.response_json = None
 
 
 class DeleteObjectSchema:

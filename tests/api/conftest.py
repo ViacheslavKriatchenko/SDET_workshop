@@ -8,7 +8,12 @@ from api.data.api_data.schemas import CreateObjectSchema
 
 
 @pytest.fixture
-def api_create_object():
+def api_create_object_fixture():
+    '''
+    создание объекта
+
+    :return response, body: возврат ответ в виде id и тело запроса
+    '''
     create = create_object.CreateObject()
     validate_data = CreateObjectSchema(**payloads.body)
 
