@@ -20,7 +20,7 @@ jobs:
 
       - name: Clone service repository
         run: |
-          git clone https://github.com/bondarenkokate73/simbirsoft_sdet_project.git
+          git clone https://github.com/bondarenkokate73/simbirsoft_sdet_project.git service
 
       - name: Set up Docker Compose
         run: |
@@ -28,9 +28,9 @@ jobs:
           sudo apt-get install -y docker-compose
 
       - name: Build and run Docker container
-        # working-directory: ./service  # Переход в папку сервиса # или curl — смотри ниже
+        working-directory: ./service  # Переход в папку сервиса # или curl — смотри ниже
         run: |
-          docker compose up --build -d
+          docker-compose up --build -d
           echo "Waiting for service to start..."
           sleep 10  
 
