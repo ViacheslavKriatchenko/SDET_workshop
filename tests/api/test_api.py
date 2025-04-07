@@ -11,6 +11,7 @@ from api.tools.assertions.base import assert_status_code
 from api.tools.assertions.base import assert_equal
 from api.tools.assertions.json_validate_schema import validate_json_schema
 from api.data.api_data.schemas import CreateObjectSchema
+from api.data.api_data.schemas import ResponseGetObjectSchema
 
 
 @allure.title("Создание объекта")
@@ -44,18 +45,30 @@ def test_get_object(api_create_object_fixture):
 @pytest.mark.api
 def test_getall_objects(api_create_object_fixture):
     getall = get_getall_objects.GetObjects()
-    id = api_create_object_fixture
+    id = api_create_object_fixture[0]
 
     getall.get_all_object()
     validate_json_schema(instance=getall.response_json, schema=get_getall_objects.GetAllJsonObjectSchema.Schema)
     assert "entity" in getall.response_json
-    # assert id in getall.response_json
+    assert id in getall.response_json
 
 
 @allure.title("Обновление созданного объекта")
 @pytest.mark.api
 def test_update_object(api_create_object_fixture):
-    pass
+    update = patch_update_object.UpdateObject()
+    get = get_object.GetObject()
+    id = api_create_object_fixture[0]
+    validate_data = CreateObjectSchema(**payloads.update_body).model_dump()
+
+    get.get_object_by_id(object_id=id)
+    before_body = ResponseGetObjectSchema(**get.response_json)
+
+    update.update_object_by_id(object_id=id, payload=validate_data)
+    get.get_object_by_id(object_id=id)
+    after_body = ResponseGetObjectSchema(**get.response_json)
+
+    assert before_body != after_body
 
 
 @allure.title("Удаление созданного объекта объекта")
@@ -67,3 +80,4 @@ def test_delete_object(api_create_object_fixture):
     delete.delete_object_by_id(object_id=id)
 
     assert_status_code(actual=delete.response.status_code, expected=204)
+    assert_equal(actual=delete.response_json, expected=None)

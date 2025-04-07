@@ -19,6 +19,9 @@ class UpdateObject:
         '''
         self.response = requests.patch(
             url=f'{self.URL}/api/patch/{object_id}',
-            payload=payload
+            json=payload
         )
-        self.response_json = self.response.json()
+        try:
+            self.response_json = self.response.json()
+        except requests.JSONDecodeError:
+            self.response_json = None
