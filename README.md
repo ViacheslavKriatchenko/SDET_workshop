@@ -77,3 +77,6 @@
 - pip install requests
 - pip install allure-pytest
 - pip install pytest-xdist
+- pip install pydantic
+- pip install jsonschema
+- pip install Faker
