@@ -32,7 +32,13 @@ jobs:
         run: |
           docker-compose up --build -d
           echo "Waiting for service to start..."
-          sleep 10  
+          sleep 10
+
+      - name: Wait for service to be ready
+        run: |
+            echo "Waiting for http://localhost:8080..."
+            timeout 60 bash -c 'until curl -s http://localhost:8080/api/_/docs/swagger/index.html; do sleep 2; done' || exit 1
+        
 
       - name: Set up Python  # Установка Python
         uses: actions/setup-python@v4
