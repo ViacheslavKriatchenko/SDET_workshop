@@ -18,6 +18,20 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Clone service repository
+        run: |
+          git clone https://github.com/bondarenkokate73/simbirsoft_sdet_project.git
+
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and run Docker container
+        # working-directory: ./service  # Переход в папку сервиса # или curl — смотри ниже
+        run: |
+          docker compose up --build -d
+          echo "Waiting for service to start..."
+          sleep 10  
+
       - name: Set up Python  # Установка Python
         uses: actions/setup-python@v4
         with:
@@ -29,7 +43,10 @@ jobs:
 
       - name: Run API tests with pytest and generate Allure results  # Запуск тестов
         run: | # Запускаем тесты с меткой "api" # --alluredir=allure-results сохраняет результаты в папку allure-results # --numprocesses 2 - выполняем тесты в 2 потока (ускоряет выполнение)
-          pytest -m ${{ github.event.inputs.test_marker || 'api' }} --alluredir=allure-results --numprocesses 2
+          pytest -m ${{ github.event.inputs.test_marker || 'api' }} \
+          --alluredir=allure-results \
+          --numprocesses 2 \
+          --base-url=http://localhost:8080
           
       - name: Upload Allure results  # Загружаем результаты тестов в GitHub Actions незавиимо от успеха always()
         if: always()
@@ -37,6 +54,12 @@ jobs:
         with:
           name: allure-results  # Название артефакта
           path: allure-results  # Путь к файлам отчета
+
+      - name: Stop and remove service containers
+        if: always()
+        # working-directory: ./service
+        run: |
+          docker-compose down
           
   publish-report:  # Джоба для публикации Allure-отчета на GitHub Pages
       needs: [ run_tests ]  # Выполняется только после успешного выполнения run-tests
