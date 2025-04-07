@@ -2,7 +2,7 @@ name: Run API Tests
 
 on:
   push:
-    branches: [main]  # Запускать workflow при пуше в main
+    branches: [main, api-develop]  # Запускать workflow при пуше в main
   workflow_dispatch:
     inputs:
       test_marker:
