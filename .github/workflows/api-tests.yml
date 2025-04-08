@@ -18,7 +18,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Clone service repository
+      - name: Clone service repository  # клонируем удаленный репо в папку service
         run: |
           git clone https://github.com/bondarenkokate73/simbirsoft_sdet_project.git service
 
