@@ -18,7 +18,7 @@
 - [] Написать полный конфиг для хранения запусковы
 
 ### Шаги:
-1. Склонировать репозитой "git clone https://github.com/ViacheslavKriatchenko/Sky_final_Auto.git"
+1. Склонировать репозитой "git clone https://github.com/ViacheslavKriatchenko/SDET_workshop.git"
 2. Запустить виртуальное окружение "python -m venv venv"
 3. Установить окружение "python -m pip install -r requirements.txt"
 4. Запустить тесты "pytest -s -v --alluredir allure_results"
@@ -34,6 +34,15 @@
 ### Структура:
 - ./.github/workflows
     - ci_tests.yml - настройки CI
+    - api-tests.yml - настройки CI
+- ./api
+    - data
+        - payloads.py - данные загрузки
+        - schemas.py - pydantic схема проверки
+    - endpoints - эндпоинты сервиса
+    - tools/assertions
+        - base.py - базовые проверки
+        - json_validate_schema.py - функция валидации
 - ./config - настройка конфигурации
     - ConfigProvider.py - глобальные 
 - ./data - тестовые данные
@@ -42,7 +51,11 @@
     - functions.py
 - ./pages - описание страниц сайта
 - ./tests - тесты
-    - test_UI.py - UI тесты
+    - api
+        - conftest.py
+        - test_api.py
+    - ui
+        - test_UI.py - UI тесты
 - ./.gitignore
 - conftest.py - фикстуры
 - global_options.ini - глобальные переменные
@@ -64,3 +77,6 @@
 - pip install requests
 - pip install allure-pytest
 - pip install pytest-xdist
+- pip install pydantic
+- pip install jsonschema
+- pip install Faker
