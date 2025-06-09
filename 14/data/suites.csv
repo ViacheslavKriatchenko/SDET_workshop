@@ -1,0 +1,6 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","17","Создание объекта","tests.api","Mon Jun 09 10:02:14 GMT 2025","passed","Mon Jun 09 10:02:14 GMT 2025","","test_api","",""
+"","12","Подтверждение создания объекта","tests.api","Mon Jun 09 10:02:14 GMT 2025","passed","Mon Jun 09 10:02:14 GMT 2025","","test_api","",""
+"","7","Обновление созданного объекта","tests.api","Mon Jun 09 10:02:14 GMT 2025","passed","Mon Jun 09 10:02:14 GMT 2025","","test_api","",""
+"","3","Удаление созданного объекта объекта","tests.api","Mon Jun 09 10:02:14 GMT 2025","passed","Mon Jun 09 10:02:14 GMT 2025","","test_api","",""
+"","3","Подтверждение создания объекта","tests.api","Mon Jun 09 10:02:14 GMT 2025","passed","Mon Jun 09 10:02:14 GMT 2025","","test_api","",""
